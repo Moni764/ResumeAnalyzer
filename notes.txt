@@ -1,0 +1,72 @@
+'''
+# Step 3: Allow the user to upload his/her file with st.file_uploader. 
+# Use the label Upload your .docx file to explain to the user what type of file is accepted.
+data = st.file_uploader("Upload your .docx file", type = ['docx'])
+# Step 4: Use the method .Document() to read the data of your uploaded .docx file.
+doc = docx.Document(data) 
+# Step 5: By using the for loop and .append() methods, read the content of your .docx file.
+text = [] # create a text variable
+for para in doc.paragraphs: # loop through the paragraphs of your .docx file
+  text.append(para.text) # append the output to the text variable
+# Step 6: Display the content of your .docx file.
+if st.button('docx file'): # display a button widget and use a short label ('.docx file') explaining to the user what this button is for
+  st.write(text) 
+'''
+
+
+Not sure if you ever got an answer for this. Suggested approach is to programmatically convert msdoc to markdown.
+
+One approach:
+
+import docx
+import PyPDF2
+import markdown
+
+def convert_docx_to_markdown(input_file, output_file):
+doc = docx.Document(input_file)
+paragraphs = [p.text for p in doc.paragraphs]
+markdown_text = ‘\n’.join(paragraphs)
+with open(output_file, ‘w’, encoding=‘utf-8’) as f:
+f.write(markdown_text)
+print(“Conversion successful!”)
+
+def convert_pdf_to_markdown(input_file, output_file):
+with open(input_file, ‘rb’) as f:
+pdf_reader = PyPDF2.PdfReader(f)
+text = ‘’
+for page in pdf_reader.pages:
+text += page.extract_text()
+markdown_text = markdown.markdown(text)
+with open(output_file, ‘w’, encoding=‘utf-8’) as f:
+f.write(markdown_text)
+print(“Conversion successful!”)
+
+Usage example
+input_file = ‘input.docx’ # Replace with the path to your Word document or PDF file
+output_file = ‘output.md’ # Replace with the desired output Markdown file
+
+if input_file.endswith(‘.docx’):
+convert_docx_to_markdown(input_file, output_file)
+elif input_file.endswith(‘.pdf’):
+convert_pdf_to_markdown(input_file, output_file)
+else:
+print(“Unsupported file format.”)
+
+Another approach:
+
+import subprocess
+
+def convert_to_markdown(input_file, output_file):
+try:
+subprocess.run([‘pandoc’, ‘-s’, input_file, ‘-o’, output_file])
+print(“Conversion successful!”)
+except FileNotFoundError:
+print(“Pandoc is not installed or not in the system path.”)
+except Exception as e:
+print(“An error occurred during conversion:”, str(e))
+
+Usage example
+input_file = ‘input.docx’ # Replace with the path to your Word document or PDF file
+output_file = ‘output.md’ # Replace with the desired output Markdown file
+
+convert_to_markdown(input_file, output_file)
