@@ -12,9 +12,14 @@ import markdown
 load_dotenv()
 
 # Configure the generative AI model with API key
-genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
-model = genai.GenerativeModel('models/gemini-1.5-flash-latest')
+## GOOGLE_API_KEY="AIzaSyAAcGhPdW8CLCEOJpa8lqirCtJamNo0W1I"
+## genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
+## model = genai.GenerativeModel('models/gemini-1.5-flash-latest')
 
+GOOGLE_API_KEY = "AIzaSyAAcGhPdW8CLCEOJpa8lqirCtJamNo0W1I"
+genai.configure(api_key=GOOGLE_API_KEY)  # ✅ Works correctly
+
+model = genai.GenerativeModel('models/gemini-1.5-flash-latest')
 # Function to get AI response based on input and prompt
 def SendRequest(input_text, pdf_content, prompt):
     response = model.generate_content([input_text, pdf_content, prompt])
