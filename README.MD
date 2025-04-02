@@ -8,9 +8,7 @@ sdk_version: 1.42.0
 app_file: app.py
 pinned: false
 license: apache-2.0
-short_description: Analyze Resume along with Job Description
+short_description: Analyze Resume along with job description
 ---
-
-### End To End Agentic AI Projects: ResumeAnalyzer
-
-The project is in development
+### End to End Agentic AI Projects: ResumeAnalyzer
+The Project is in development
