@@ -1,7 +1,7 @@
 ---
 title: ResumeAnalyzer
 emoji: 🐨
-colorFrom: blue
+colorFrom: green
 colorTo: red
 sdk: streamlit
 sdk_version: 1.42.0
