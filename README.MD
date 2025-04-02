@@ -10,5 +10,3 @@ pinned: false
 license: apache-2.0
 short_description: Analyze Resume along with job description
 ---
-### End to End Agentic AI Projects: ResumeAnalyzer
-The Project is in development progress
